@@ -115,17 +115,3 @@ Metrics currently gathered come from `/squid-internal-mgr/counters`, and are all
 ```
 squid,host=d3541b1c1112,source=http://squid:3128/squid-internal-mgr/counters wall_time=0.884082,server_http_kbytes_in=0,server_other_kbytes_out=0,icp_kbytes_sent=0,icp_q_kbytes_recv=0,icp_r_kbytes_recv=0,cd_times_used=0,server_all_errors=0,server_other_requests=0,unlink_requests=0,swap_files_cleaned=0,cpu_time=0.056241,server_all_kbytes_out=0,server_http_requests=0,icp_replies_sent=0,icp_replies_queued=0,client_http_hit_kbytes_out=0,cd_msgs_recv=0,cd_kbytes_recv=0,server_other_errors=0,icp_r_kbytes_sent=0,icp_times_used=0,cd_memory=0,client_http_requests=0,client_http_kbytes_in=0,server_http_errors=0,server_ftp_kbytes_in=0,page_faults=0,client_http_errors=0,icp_pkts_sent=0,icp_queries_sent=0,icp_query_timeouts=0,aborted_requests=0,swap_outs=0,swap_ins=0,icp_queries_recv=0,server_ftp_kbytes_out=0,icp_pkts_recv=0,icp_kbytes_recv=0,cd_msgs_sent=0,cd_local_memory=0,client_http_kbytes_out=0,server_all_kbytes_in=0,cd_kbytes_sent=0,server_http_kbytes_out=0,select_loops=2,client_http_hits=0,server_other_kbytes_in=0,server_ftp_requests=0,server_ftp_errors=0,server_all_requests=0,icp_replies_recv=0,icp_q_kbytes_sent=0 1565150341000000000
 ```
-
-### Development
-
-Run short tests:
-```
-go test -short
-```
-
-Run full integration tests:
-```
-cd plugins/inputs/squid
-docker-compose -f dev/docker-compose.yml up squid
-go test
-```
