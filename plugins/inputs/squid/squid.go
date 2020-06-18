@@ -126,7 +126,7 @@ const sampleConfig string = `
   # tls_ca = "/etc/telegraf/ca.pem"
   # tls_cert = "/etc/telegraf/cert.pem"
   # tls_key = "/etc/telegraf/key.pem"
-  
+
   ## Use TLS but skip chain & host verification
   # insecure_skip_verify = false
 `
@@ -169,25 +169,25 @@ func (s *Squid) Gather(acc telegraf.Accumulator) error {
 
 // gather counters
 func (s *Squid) gatherCounters(url string, acc telegraf.Accumulator) error {
-	url += "/squid-internal-mgr/counters"
+
 	resp, err := s.client.Get(url)
 	if err != nil {
-		return fmt.Errorf("unable to GET \"%s\": %s", url, err)
+		return fmt.Errorf("unable to GET \"%s\": %s", url+"/squid-internal-mgr/counters", err)
 	}
 
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("non-OK status code returned from \"%s\": %d", url, resp.StatusCode)
+		return fmt.Errorf("non-OK status code returned from \"%s\": %d", url+"/squid-internal-mgr/counters", resp.StatusCode)
 	}
 
 	fields := parseBody(resp.Body)
 	if err != nil {
-		return fmt.Errorf("unable to parse body from \"%s\": %s", url, err)
+		return fmt.Errorf("unable to parse body from \"%s\": %s", url+"/squid-internal-mgr/counters", err)
 	}
 
 	tags := map[string]string{
-		"source": s.Url,
+		"source": s.Url+"/squid-internal-mgr/counters",
 	}
 
 	acc.AddFields("squid", fields, tags)
